@@ -40,8 +40,7 @@ public class Arte {
                                                             (| |
                                                              |  \\
                                                              |lllj
-                                                             |||||               
-                
+                                                             |||||
                 
                 """);
     }
@@ -219,6 +218,7 @@ public class Arte {
         }
     }
 
+    //pintar letrero de victoria
     public static void printVictoria(){
         System.out.println("""
                 
@@ -230,11 +230,12 @@ public class Arte {
                    <\\        />      < >    \\\\                    |        \\\\           //    |       \\       < >       /       \\    \s
                      \\o    o/         |       \\         /         o          \\         /     <o>       \\o      |      o/         \\o  \s
                       v\\  /v          o        o       o         <|           o       o       |         v\\     o     /v           v\\ \s
-                       <\\/>         __|>_      <\\__ __/>         / \\          <\\__ __/>      / \\         <\\  __|>_  />             <\\\s        
+                       <\\/>         __|>_      <\\__ __/>         / \\          <\\__ __/>      / \\         <\\  __|>_  />             <\\\s
                 
                 """);
     }
 
+    //pintar letrero de derrota
     public static void printDerrota(){
         System.out.println("""
                 o__ __o        o__ __o__/_   o__ __o         o__ __o         o__ __o     ____o__ __o____    o        \s
@@ -253,7 +254,4 @@ public class Arte {
                 """);
     }
 
-    public static void main(String[] args) {
-        printParca();
-    }
 }
