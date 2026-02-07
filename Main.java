@@ -1,11 +1,17 @@
 package com.emiliojimeno.daw.rpg;
 
-public class Main {
-    public static Personaje[] personajes = new Personaje[5];
-    public static Personaje jugador;
+import java.util.Scanner;
 
-    public static void crearPersonajes() {
-        jugador = new Personaje("jugador1", 100, 1.1f);
+public class Main {
+    static Personaje[] personajes = new Personaje[5];
+    static Personaje jugador;
+    static String nombreJugador;
+    static Scanner sc = new Scanner(System.in);
+
+
+    //creación de los personajes y monstruos y se añaden al array
+    public static void crearPersonajes(String nombreJugador) {
+        jugador = new Personaje(nombreJugador, 100, 1.1f);
 
         Personaje monstruo1 = new Personaje("Esqueleto");
         Personaje monstruo2 = new Personaje("Sireno");
@@ -20,30 +26,35 @@ public class Main {
         personajes[4] = monstruo5;
     }
 
-    static void main(String[] args) {
-        crearPersonajes();
-        System.out.println("Personajes creados");
-        boolean victoria = true;
+    public static void main(String[] args) {
+        System.out.println("Bienvenido al videojuego!!"); //cambiar cuando haya nombre del juego
+        System.out.println("Elige un nombre para tu personaje y a luchar!");
+        System.out.print("Nombre: ");
+        nombreJugador = sc.nextLine();
+        crearPersonajes(nombreJugador); //crear personajes
+        System.out.println("Personajes creados"); //feedback de desarrollo, quitar para versión final
+        boolean victoria = true; //esta variable evalúa si al salir del bucle hemos ganado o perdido
 
+        //recorremos el array de monstruos para zurrarnos contra ellos uno detrás de otro
         for (int i = 0; i < personajes.length; i++) {
             System.out.println("\n=======================================================================");
-            System.out.println("Comienza el encuentro contra " + personajes[i].getNombre());
+            System.out.println("Comienza el encuentro contra " + personajes[i].getNOMBRE());
             System.out.println("Este monstruo tiene " + personajes[i].getVidaActual() + " puntos de vida.");
-            Arte.dibujarEnemigo(i);
+            Arte.dibujarEnemigo(i); //pintar monstruo
             System.out.println("=======================================================================");
-            System.out.println("Te quedan " + jugador.getVidaActual() + " puntos de vida.");
+            System.out.println("Comienzas el combate con " + jugador.getVidaActual() + " puntos de vida.");
 
             do {
                 System.out.println("---------------------------------");
-                System.out.println("Jugador ataca");
+                System.out.println(nombreJugador + " ataca");
                 jugador.atacar(personajes[i]);
                 if(personajes[i].getVidaActual() > 0){
-                    System.out.println("Al monstruo le quedan " +  personajes[i].getVidaActual());
+                    System.out.println("Al monstruo le quedan " +  personajes[i].getVidaActual() + " puntos de vida.\n");
                 }
 
                 if (!personajes[i].comprobarVida()) break;
 
-                System.out.println("El monstruo contrataca");
+                System.out.println(personajes[i].getNOMBRE() + " contraataca");
                 personajes[i].atacar(jugador);
                 if(jugador.getVidaActual() > 0){
                     System.out.println("Te quedan " + jugador.getVidaActual() + " puntos de vida");
@@ -60,7 +71,10 @@ public class Main {
             }
         }
 
+        System.out.println("\n\n");
         if (victoria) {
+            System.out.println("Has vencido a todos tus enemigos");
+            System.out.println("Has finalizado el juego con " + jugador.getVidaActual() + " puntos de vida.");
             Arte.printVictoria();
         } else {
             Arte.printDerrota();
