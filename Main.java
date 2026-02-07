@@ -27,18 +27,20 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        System.out.println("Bienvenido al videojuego!!"); //cambiar cuando haya nombre del juego
-        System.out.println("Elige un nombre para tu personaje y a luchar!");
-        System.out.print("Nombre: ");
+        Lore.printPrologo();
+        System.out.print("¿Cómo te llamas, héroe? : ");
         nombreJugador = sc.nextLine();
+        System.out.println("\n\n");
         crearPersonajes(nombreJugador); //crear personajes
-        System.out.println("Personajes creados"); //feedback de desarrollo, quitar para versión final
+        //System.out.println("Personajes creados"); //feedback de desarrollo, quitar para versión final
         boolean victoria = true; //esta variable evalúa si al salir del bucle hemos ganado o perdido
 
         //recorremos el array de monstruos para zurrarnos contra ellos uno detrás de otro
         for (int i = 0; i < personajes.length; i++) {
+            Lore.contarHistoria(i);
+            sc.nextLine(); //detener ejecución para que el jugador pueda leer la historia antes de la pelea
             System.out.println("\n=======================================================================");
-            System.out.println("Comienza el encuentro contra " + personajes[i].getNOMBRE());
+            System.out.println("Comienza el encuentro contra " + personajes[i].getNombre());
             System.out.println("Este monstruo tiene " + personajes[i].getVidaActual() + " puntos de vida.");
             Arte.dibujarEnemigo(i); //pintar monstruo
             System.out.println("=======================================================================");
@@ -54,7 +56,7 @@ public class Main {
 
                 if (!personajes[i].comprobarVida()) break;
 
-                System.out.println(personajes[i].getNOMBRE() + " contraataca");
+                System.out.println(personajes[i].getNombre() + " contraataca");
                 personajes[i].atacar(jugador);
                 if(jugador.getVidaActual() > 0){
                     System.out.println("Te quedan " + jugador.getVidaActual() + " puntos de vida");
