@@ -1,63 +1,94 @@
 package com.emiliojimeno.daw.rpg;
 
 public class Personaje {
-    private String nombre;
+    private final String NOMBRE;
     private float vidaMaxima;
     private float vidaActual;
-    private float ataque;
+    private final float ATAQUE;
+    private final float ARMADURA;
+    private final float PRECISION;
 
     //constructor para enemigos
     public Personaje(String nombre) {
-        this.nombre = nombre;
+        this.NOMBRE = nombre;
 
         do {
             this.vidaMaxima = (int) (Math.random() * 100);
         } while (this.vidaMaxima < 60);
 
         this.vidaActual = vidaMaxima;
-        this.ataque = 0.5f;
+        this.ATAQUE = 0.5f;
+        this.ARMADURA = 1;
+        this.PRECISION = 75;
     }
 
     //constructor para el jugador
     public Personaje(String nombre, int vidaMaxima, float ataque) {
-        this.nombre = nombre;
+        this.NOMBRE = nombre;
         this.vidaMaxima = vidaMaxima;
         this.vidaActual = vidaMaxima;
-        this.ataque = ataque;
+        this.ATAQUE = ataque;
+        this.ARMADURA = 3;
+        this.PRECISION = 90;
     }
 
 
-
+    // acción de atacar
     public void atacar(Personaje defensor) {
-        float damage = (float) (Math.random() * 100) * this.ataque;
-        System.out.println("El ataque ha generado " + damage + " puntos de daño.");
-        recibirDano(damage, defensor);
+        float damage;
+        float tiradaDadosPrecision = (float) (Math.random() * this.PRECISION); //esto dará un valor entre 0 y el valor de PRECISIÓN
+        //para calcular el daño se multiplica el valor base del personaje con un valor aleatorio entre 0 y 100
+        float deflectado = (float) (Math.random() * this.ARMADURA);
+
+        if(deflectado < 0){ //la armadura detiene daño, pero no puede "curar"
+            deflectado = 0;
+        }
+
+        if(tiradaDadosPrecision >= 50){
+            damage = (float) ((Math.random() * 100) * this.ATAQUE) - deflectado;
+            if(damage < 0) {
+                damage = 0;
+            }
+            System.out.println("La armadura ha detenido " + deflectado + " puntos de daño.");
+            System.out.println("El ataque ha causado " + damage + " puntos de daño.");
+        }else{
+            damage = 0;
+            System.out.println("El ataque falló!!");
+        }
+
+
+        recibirDano(damage, defensor); //una vez calculado el daño, se le pasa al receptor para que lo aplique
     }
 
+    //este metodo recibe una cantidad de daño y se lo resta a la vida del personaje en cuestión
     public void recibirDano(float damage, Personaje defensor) {
         defensor.setVidaActual(defensor.getVidaActual() - damage);
         if(defensor.getVidaActual() <= 0){
-            System.out.println(defensor.getNombre() + " ha sido derrotado.");
+            System.out.println(defensor.getNOMBRE() + " ha sido derrotado.");
         }
     }
 
+    //comprueba si un personaje está vivo o muerto
     public boolean comprobarVida() {
         boolean comprobar = true;
 
         if (this.vidaActual <= 0) {
             comprobar = false;
         }
-
         return comprobar;
     }
-    public String getNombre(){
-        return this.nombre;
+
+    //getter de variable
+    public String getNOMBRE(){
+        return this.NOMBRE;
     }
 
+    //getter de variable
     public float getVidaActual() {
         return vidaActual;
     }
 
+    // sirve para cambiar la vida a un personaje (sufrir daño, curarse...)
     private void setVidaActual(float vidaActual) {
         this.vidaActual = vidaActual;
     }
