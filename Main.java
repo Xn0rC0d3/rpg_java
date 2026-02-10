@@ -67,12 +67,12 @@ public class Main {
 
             } while (personajes[i].comprobarVida() || jugador.comprobarVida());
 
-            jugador.curarTrasCadaCombate(); //tras derrotar a cada enemigo, existe una pequeña posibilidad de recuperar algo de salud
-
             if (!jugador.comprobarVida()) {
                 victoria = false;
                 break;
             }
+            //esto debe suceder lo último, o habría alguna posibilidad de "revivir"
+            jugador.curarTrasCadaCombate(); //tras derrotar a cada enemigo, existe una pequeña posibilidad de recuperar algo de salud
         }
 
         System.out.println("\n\n");
