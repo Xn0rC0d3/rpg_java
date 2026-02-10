@@ -54,12 +54,13 @@ public class MainTest {
 
                 } while (personajes[i].comprobarVida() || jugador.comprobarVida());
 
-                jugador.curarTrasCadaCombate(); //tras derrotar a cada enemigo, existe una pequeña posibilidad de recuperar algo de salud
+
 
                 if (!jugador.comprobarVida()) {
                     victoria = false;
                     break;
                 }
+                jugador.curarTrasCadaCombate(); //tras derrotar a cada enemigo, existe una pequeña posibilidad de recuperar algo de salud
             }
 
             switch (contadorCiclos){
@@ -84,7 +85,7 @@ public class MainTest {
 
             }
 
-            if(z % 50 == 0) { //hacer filas de 50 resultados para legibilidad
+            if(z % 50 == 0) { //filas de 50 resultados para mejor legibilidad
                 System.out.println(contadorCiclos);
             }else{
                 System.out.print(contadorCiclos + ", ");
