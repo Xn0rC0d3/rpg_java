@@ -52,9 +52,9 @@ public class Main {
                 jugador.atacar(personajes[i]);
                 if(personajes[i].getVidaActual() > 0){
                     System.out.println("Al monstruo le quedan " +  personajes[i].getVidaActual() + " puntos de vida.\n");
+                }else{
+                    break;
                 }
-
-                if (!personajes[i].comprobarVida()) break;
 
                 System.out.println(personajes[i].getNombre() + " contraataca");
                 personajes[i].atacar(jugador);
@@ -66,6 +66,8 @@ public class Main {
                 if (!jugador.comprobarVida()) break;
 
             } while (personajes[i].comprobarVida() || jugador.comprobarVida());
+
+            jugador.curarTrasCadaCombate(); //tras derrotar a cada enemigo, existe una pequeña posibilidad de recuperar algo de salud
 
             if (!jugador.comprobarVida()) {
                 victoria = false;
