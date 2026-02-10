@@ -1,4 +1,4 @@
-package com.emiliojimeno.daw.rpg;
+package com.emiliojimeno.daw.rpgBIS;
 
 import java.util.Scanner;
 
@@ -8,7 +8,7 @@ public class MainTest {
     static String nombreJugador = "player1";
     static Scanner sc = new Scanner(System.in);
     public static int contadorCiclos;
-    public static final int CANTIDAD_TEST = 150;
+    public static final int CANTIDAD_TEST = 500;
     static int veces0 = 0;
     static int veces1 = 0;
     static int veces2 = 0;
@@ -40,12 +40,21 @@ public class MainTest {
             crearPersonajes(nombreJugador); //crear personajes
             boolean victoria = true; //esta variable evalúa si al salir del bucle hemos ganado o perdido
             for (int i = 0; i < personajes.length; i++) {
+
                 do {
+
                     jugador.atacar(personajes[i]);
-                    if (!personajes[i].comprobarVida()) break;
+                    if(personajes[i].getVidaActual() <= 0){
+                        break;
+                    }
+
                     personajes[i].atacar(jugador);
+
                     if (!jugador.comprobarVida()) break;
+
                 } while (personajes[i].comprobarVida() || jugador.comprobarVida());
+
+                jugador.curarTrasCadaCombate(); //tras derrotar a cada enemigo, existe una pequeña posibilidad de recuperar algo de salud
 
                 if (!jugador.comprobarVida()) {
                     victoria = false;
