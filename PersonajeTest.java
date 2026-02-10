@@ -95,10 +95,10 @@ public class PersonajeTest {
         } else if (num >= 50 && num < 80) {
             this.setVidaActual(vidaActual + POCION_MINIMA);
 
-        } else if (num >= 80 && num < 90) {
+        } else if (num >= 80 && num < 92) {
             this.setVidaActual(vidaActual + POCION_MEDIA);
 
-        } else if (num >= 90 && num < 99) {
+        } else if (num >= 92 && num < 99) {
             setVidaActual(vidaActual + POCION_GRANDE);
 
         } else if (num >= 99 && num < 100) {
