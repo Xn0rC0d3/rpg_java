@@ -1,6 +1,9 @@
 package com.emiliojimeno.daw.rpg;
 
+import java.util.Random;
+
 public class Personaje {
+    private Random rd = new Random();
     private final String NOMBRE;
     private float vidaMaxima;
     private float vidaActual;
@@ -74,6 +77,38 @@ public class Personaje {
         if(defensor.getVidaActual() <= 0){
             System.out.println(defensor.getNombre() + " ha sido derrotado.");
         }
+    }
+
+
+    //tras cada combate, el jugador tiene una pequeña posibilidad de curarse una porción de vida.
+    //a menor probabilidad, mayor curación
+    public void curarTrasCadaCombate(){
+        final float POCION_MINIMA = 25;
+        final float POCION_MEDIA = 50;
+        final float POCION_GRANDE = 75;
+
+        float num = rd.nextInt(100)+1;
+        if(num > 0 && num < 50){
+
+        } else if (num >= 50 && num < 80) {
+            this.setVidaActual(vidaActual + POCION_MINIMA);
+            System.out.println("El monstruo dejó caer lo que parece ser una pequeña y rudimentaria poción de salud. Tras beberla, recuperas " + POCION_MINIMA + " puntos de vida.");
+        } else if (num >= 80 && num < 90) {
+            this.setVidaActual(vidaActual + POCION_MEDIA);
+            System.out.println("El monstruo dejó caer lo que parece un botellín de ambar que parece contener una poción de salud. Tras beberla, recuperas " + POCION_MEDIA + " puntos de salud.");
+        } else if (num >= 90 && num < 98) {
+            setVidaActual(vidaActual + POCION_GRANDE);
+            System.out.println("El monstruo dejó caer una especie de bota de vino llena de poción de salud. Tras beberla, recuperas " + POCION_GRANDE + " puntos de salud.");
+        } else if (num >= 98 && num < 100) {
+            setVidaActual(vidaActual = vidaMaxima);
+            System.out.println("El monstruo dejó caer un precioso frasco de cristal lleno de un líquido de movimiento hipnotizante." +
+                    "Parece ser una poción de salud muy avanzada. Recuperas todos tus puntos de salud!");
+
+        }
+        if (this.vidaActual > this.vidaMaxima){ //la curación no puede exceder el máximo de vida
+            this.vidaActual = this.vidaMaxima;
+        }
+        System.out.println("Tu vida actual es de: " + this.getVidaActual());
     }
 
     //comprueba si un personaje está vivo o muerto
