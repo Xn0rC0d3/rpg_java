@@ -1,4 +1,4 @@
-package com.emiliojimeno.daw.rpgBIS;
+package com.emiliojimeno.daw.rpg;
 
 import java.util.Scanner;
 
