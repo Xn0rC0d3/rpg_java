@@ -1,6 +1,9 @@
 package com.emiliojimeno.daw.rpg;
 
+import java.util.Random;
+
 public class PersonajeTest {
+    private Random rd = new Random();
     private final String NOMBRE;
     private float vidaMaxima;
     private float vidaActual;
@@ -57,8 +60,10 @@ public class PersonajeTest {
             if(damage < 0) {
                 damage = 0;
             }
+
         }else{
             damage = 0;
+
         }
 
 
@@ -68,11 +73,42 @@ public class PersonajeTest {
     //este metodo recibe una cantidad de daño y se lo resta a la vida del personaje en cuestión
     public void recibirDamage(float damage, PersonajeTest defensor) {
         defensor.setVidaActual(defensor.getVidaActual() - damage);
+
         if(defensor.getVidaActual() <= 0){
             if(defensor.getNombre() != "player1"){
                 MainTest.contadorCiclos ++;
             }
         }
+    }
+
+
+    //tras cada combate, el jugador tiene una pequeña posibilidad de curarse una porción de vida.
+    //a menor probabilidad, mayor curación
+    public void curarTrasCadaCombate(){
+        final float POCION_MINIMA = 5;
+        final float POCION_MEDIA = 10;
+        final float POCION_GRANDE = 25;
+
+        float num = rd.nextInt(100)+1;
+        if(num > 0 && num < 50){
+
+        } else if (num >= 50 && num < 80) {
+            this.setVidaActual(vidaActual + POCION_MINIMA);
+
+        } else if (num >= 80 && num < 90) {
+            this.setVidaActual(vidaActual + POCION_MEDIA);
+
+        } else if (num >= 90 && num < 99) {
+            setVidaActual(vidaActual + POCION_GRANDE);
+
+        } else if (num >= 99 && num < 100) {
+            setVidaActual(vidaActual = vidaMaxima);
+
+        }
+        if (this.vidaActual > this.vidaMaxima){ //la curación no puede exceder el máximo de vida
+            this.vidaActual = this.vidaMaxima;
+        }
+
     }
 
     //comprueba si un personaje está vivo o muerto
