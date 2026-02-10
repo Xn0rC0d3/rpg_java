@@ -84,7 +84,7 @@ public class MainTest {
 
             }
 
-            if(z % 10 == 0) {
+            if(z % 50 == 0) { //hacer filas de 50 resultados para legibilidad
                 System.out.println(contadorCiclos);
             }else{
                 System.out.print(contadorCiclos + ", ");
