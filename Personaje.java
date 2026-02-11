@@ -3,7 +3,7 @@ package com.emiliojimeno.daw.rpg;
 import java.util.Random;
 
 public class Personaje {
-    private Random rd = new Random();
+    private final Random rd = new Random();
     private final String NOMBRE;
     private float vidaMaxima;
     private float vidaActual;
@@ -87,22 +87,25 @@ public class Personaje {
         final float POCION_MEDIA = 50;
         final float POCION_GRANDE = 75;
 
-        float num = rd.nextInt(100)+1;
-        if(num > 0 && num < 50){
+        float num = rd.nextInt(100);
 
-        } else if (num >= 50 && num < 80) {
+        if (num >= 50 && num < 80) {
             this.setVidaActual(vidaActual + POCION_MINIMA);
-            System.out.println("El monstruo dejó caer lo que parece ser una pequeña y rudimentaria poción de salud. Tras beberla, recuperas " + POCION_MINIMA + " puntos de vida.");
+            System.out.println("El monstruo dejó caer lo que parece ser una pequeña y rudimentaria poción de salud." +
+                    " Tras beberla, recuperas " + POCION_MINIMA + " puntos de vida.");
         } else if (num >= 80 && num < 92) {
             this.setVidaActual(vidaActual + POCION_MEDIA);
-            System.out.println("El monstruo dejó caer lo que parece un botellín de ambar que parece contener una poción de salud. Tras beberla, recuperas " + POCION_MEDIA + " puntos de salud.");
+            System.out.println("El monstruo dejó caer lo que parece un botellín de ambar que parece contener " +
+                    "una poción de salud. Tras beberla, recuperas " + POCION_MEDIA + " puntos de salud.");
         } else if (num >= 92 && num < 99) {
             setVidaActual(vidaActual + POCION_GRANDE);
-            System.out.println("El monstruo dejó caer una especie de bota de vino llena de poción de salud. Tras beberla, recuperas " + POCION_GRANDE + " puntos de salud.");
-        } else if (num >= 99 && num < 100) {
+            System.out.println("El monstruo dejó caer una especie de bota de vino llena de poción de salud." +
+                    "Tras beberla, recuperas " + POCION_GRANDE + " puntos de salud.");
+        } else if (num >= 99) {
             setVidaActual(vidaActual = vidaMaxima);
-            System.out.println("El monstruo dejó caer un precioso frasco de cristal lleno de un líquido de movimiento hipnotizante." +
-                    "Parece ser una poción de salud muy avanzada. Recuperas todos tus puntos de salud!");
+            System.out.println("El monstruo dejó caer un precioso frasco de cristal lleno de " +
+                    "un líquido de movimiento hipnotizante. Parece ser una poción de salud muy avanzada." +
+                    "Recuperas todos tus puntos de salud!");
         }
         if (this.vidaActual > this.vidaMaxima){ //la curación no puede exceder el máximo de vida
             this.vidaActual = this.vidaMaxima;
