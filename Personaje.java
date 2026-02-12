@@ -1,7 +1,6 @@
 import java.util.Random;
 
 public class Personaje {
-    private final Random rd = new Random();
     private final String NOMBRE;
     private float vidaMaxima;
     private float vidaActual;
@@ -38,7 +37,7 @@ public class Personaje {
         this.vidaMaxima = vidaMaxima;
         this.vidaActual = vidaMaxima;
         this.ATAQUE = ataque;
-        this.ARMADURA = 3;
+        this.ARMADURA = 2.5f;
         this.PRECISION = 90;
     }
 
@@ -48,7 +47,7 @@ public class Personaje {
         float damage;
         float tiradaDadosPrecision = (float) (Math.random() * this.PRECISION); //esto dará un valor entre 0 y el valor de PRECISIÓN
         //para calcular el daño se multiplica el valor base del personaje con un valor aleatorio entre 0 y 100
-        float deflectado = (float) (Math.random() * this.ARMADURA);
+        float deflectado = (float) (Math.random() * defensor.ARMADURA);
 
         if(deflectado < 0){ //la armadura detiene daño, pero no puede "curar"
             deflectado = 0;
@@ -79,6 +78,7 @@ public class Personaje {
     //tras cada combate, el jugador tiene una pequeña posibilidad de curarse una porción de vida.
     //a menor probabilidad, mayor curación
     public void curarTrasCadaCombate(){
+        final Random rd = new Random();
         final float POCION_MINIMA = 5;
         final float POCION_MEDIA = 10;
         final float POCION_GRANDE = 25;
