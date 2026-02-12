@@ -11,7 +11,7 @@ public class Main {
 
     //creación de los personajes y monstruos y se añaden al array
     public static void crearPersonajes(String nombreJugador) {
-        jugador = new Personaje(nombreJugador, 100, 1.1f);
+        jugador = new Personaje(nombreJugador, 100, 1);
 
         Personaje monstruo1 = new Personaje("Esqueleto");
         Personaje monstruo2 = new Personaje("Sireno");
