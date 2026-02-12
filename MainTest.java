@@ -7,15 +7,14 @@ public class MainTest {
     static PersonajeTest jugador;
     static String nombreJugador = "player1";
     static Scanner sc = new Scanner(System.in);
-    public static int contadorCiclos;
-    public static final int CANTIDAD_TEST = 500;
-    static int veces0 = 0;
-    static int veces1 = 0;
-    static int veces2 = 0;
-    static int veces3 = 0;
-    static int veces4 = 0;
-    static int veces5 = 0;
-
+    public static int contadorCiclos; //este contador comienza siendo 0
+    public static final double CANTIDAD_TEST = 500;
+    static double veces0 = 0;
+    static double veces1 = 0;
+    static double veces2 = 0;
+    static double veces3 = 0;
+    static double veces4 = 0;
+    static double veces5 = 0;
 
     //creación de los personajes y monstruos y se añaden al array
     public static void crearPersonajes(String nombreJugador) {
@@ -35,6 +34,7 @@ public class MainTest {
     }
 
     public static void main(String[] args) {
+        System.out.println("\n");
         for(int z = 0; z < CANTIDAD_TEST; z++) { //veces que queremos que se repita el test
             contadorCiclos = 0; //reseteo cada ejecución
             crearPersonajes(nombreJugador); //crear personajes
@@ -42,19 +42,14 @@ public class MainTest {
             for (int i = 0; i < personajes.length; i++) {
 
                 do {
-
                     jugador.atacar(personajes[i]);
                     if(personajes[i].getVidaActual() <= 0){
                         break;
                     }
-
                     personajes[i].atacar(jugador);
-
                     if (!jugador.comprobarVida()) break;
 
                 } while (personajes[i].comprobarVida() || jugador.comprobarVida());
-
-
 
                 if (!jugador.comprobarVida()) {
                     victoria = false;
@@ -63,7 +58,7 @@ public class MainTest {
                 jugador.curarTrasCadaCombate(); //tras derrotar a cada enemigo, existe una pequeña posibilidad de recuperar algo de salud
             }
 
-            switch (contadorCiclos){
+            switch (contadorCiclos){ //cuando se acaba el juego, miramos el valor del contador y sumamos 1 a la opción correspondiente
                 case 0:
                     veces0++;
                     break;
@@ -85,19 +80,20 @@ public class MainTest {
 
             }
 
-            if(z % 50 == 0) { //filas de 50 resultados para mejor legibilidad
+            if((z+1) % 50 == 0) { //filas de 50 resultados para mejor legibilidad
                 System.out.println(contadorCiclos);
             }else{
                 System.out.print(contadorCiclos + ", ");
             }
         }
-        System.out.println("\n\nSe han realizado " + CANTIDAD_TEST +  " ejecuciones del juego. Esto son los resultados: ");
-        System.out.println("Veces que el jugador ha perdido contra el primer monstruo: " + veces0 + " (" + ((double)veces0/(double)CANTIDAD_TEST)*100 + "%)");
-        System.out.println("Veces que el jugador ha perdido contra el segundo monstruo: " + veces1 + " (" + ((double)veces1/(double)CANTIDAD_TEST)*100 + "%)");
-        System.out.println("Veces que el jugador ha perdido contra el tercer monstruo: " + veces2 + " (" + ((double)veces2/(double)CANTIDAD_TEST)*100 + "%)");
-        System.out.println("Veces que el jugador ha perdido contra el cuarto monstruo: " + veces3 + " (" + ((double)veces3/(double)CANTIDAD_TEST)*100 + "%)");
-        System.out.println("Veces que el jugador ha perdido contra el quinto monstruo: " + veces4 + " (" + ((double)veces4/(double)CANTIDAD_TEST)*100 + "%)");
-        System.out.println("Veces que el jugador se ha pasado el juego: " + veces5 + " (" + ((double)veces5/(double)CANTIDAD_TEST)*100 + "%)");
+        //mostrar resultados por pantalla
+        System.out.printf("\n\nSe han realizado %.0f ejecuciones del juego. Esto son los resultados: \n", CANTIDAD_TEST);
+        System.out.printf("Veces que el jugador ha perdido contra el primer monstruo: %.0f (%.1f %%)\n", veces0, ((veces0/CANTIDAD_TEST)*100));
+        System.out.printf("Veces que el jugador ha perdido contra el primer monstruo: %.0f (%.1f %%)\n", veces1, ((veces1/CANTIDAD_TEST)*100));
+        System.out.printf("Veces que el jugador ha perdido contra el primer monstruo: %.0f (%.1f %%)\n", veces2, ((veces2/CANTIDAD_TEST)*100));
+        System.out.printf("Veces que el jugador ha perdido contra el primer monstruo: %.0f (%.1f %%)\n", veces3, ((veces3/CANTIDAD_TEST)*100));
+        System.out.printf("Veces que el jugador ha perdido contra el primer monstruo: %.0f (%.1f %%)\n", veces4, ((veces4/CANTIDAD_TEST)*100));
+        System.out.printf("Veces que el jugador se ha pasado el juego: %.0f (%.1f %%)", veces5, ((veces5/CANTIDAD_TEST)*100));
 
     }
 }
