@@ -20,11 +20,12 @@ public class Personaje {
 
         this.NOMBRE = nombre;
 
-        do {
+        do {//comprobar que la vida máxima no pueda ser menor de 60
             this.vidaMaxima = (int) (Math.random() * 100);
         } while (this.vidaMaxima < 60);
 
-        this.vidaActual = vidaMaxima;
+        this.vidaActual = vidaMaxima;//el enemigo comienza con la vida al tope
+        
         //fórmula para aleatorio en un rango: Math.random() * (max - min) + min
         this.ATAQUE = (float)(Math.random() * (MAX_ATAQUE-MIN_ATAQUE)) + MIN_ATAQUE;
         this.ARMADURA = (float)(Math.random() * (MAX_ARMADURA-MIN_ARMADURA)) + MIN_ARMADURA;
@@ -53,7 +54,7 @@ public class Personaje {
             deflectado = 0;
         }
 
-        if(tiradaDadosPrecision >= 50){
+        if(tiradaDadosPrecision >= 50){ //si la tirada es inferior a 50, el ataque falla
             damage = (float) ((Math.random() * 100) * this.ATAQUE) - deflectado;
             if(damage < 0) {
                 damage = 0;
@@ -64,8 +65,6 @@ public class Personaje {
             damage = 0;
             System.out.println("El ataque falló!!");
         }
-
-
         recibirDamage(damage, defensor); //una vez calculado el daño, se le pasa al receptor para que lo aplique
     }
 
@@ -77,7 +76,6 @@ public class Personaje {
         }
     }
 
-
     //tras cada combate, el jugador tiene una pequeña posibilidad de curarse una porción de vida.
     //a menor probabilidad, mayor curación
     public void curarTrasCadaCombate(){
@@ -85,7 +83,7 @@ public class Personaje {
         final float POCION_MEDIA = 10;
         final float POCION_GRANDE = 25;
 
-        float num = rd.nextInt(100);
+        float num = rd.nextFloat(100); //genera un valor entre 0 (inclusive) y 100 (no inclusive)
 
         if (num >= 50 && num < 80) {
             this.setVidaActual(vidaActual + POCION_MINIMA);
