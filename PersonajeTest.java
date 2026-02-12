@@ -43,7 +43,6 @@ public class PersonajeTest {
         this.PRECISION = 90;
     }
 
-
     // acción de atacar
     public void atacar(PersonajeTest defensor) {
         float damage;
@@ -60,13 +59,9 @@ public class PersonajeTest {
             if(damage < 0) {
                 damage = 0;
             }
-
         }else{
             damage = 0;
-
         }
-
-
         recibirDamage(damage, defensor); //una vez calculado el daño, se le pasa al receptor para que lo aplique
     }
 
@@ -75,12 +70,11 @@ public class PersonajeTest {
         defensor.setVidaActual(defensor.getVidaActual() - damage);
 
         if(defensor.getVidaActual() <= 0){
-            if(defensor.getNombre() != "player1"){
-                MainTest.contadorCiclos ++;
+            if(defensor.getNombre() != "player1"){ //cada vez que un personaje que no sea el jugador, muere
+                MainTest.contadorCiclos ++; //se suma 1 al contador de ciclos
             }
         }
     }
-
 
     //tras cada combate, el jugador tiene una pequeña posibilidad de curarse una porción de vida.
     //a menor probabilidad, mayor curación
@@ -108,7 +102,6 @@ public class PersonajeTest {
         if (this.vidaActual > this.vidaMaxima){ //la curación no puede exceder el máximo de vida
             this.vidaActual = this.vidaMaxima;
         }
-
     }
 
     //comprueba si un personaje está vivo o muerto
