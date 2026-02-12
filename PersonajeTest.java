@@ -39,7 +39,7 @@ public class PersonajeTest {
         this.vidaMaxima = vidaMaxima;
         this.vidaActual = vidaMaxima;
         this.ATAQUE = ataque;
-        this.ARMADURA = 3;
+        this.ARMADURA = 2.5f;
         this.PRECISION = 90;
     }
 
@@ -48,7 +48,7 @@ public class PersonajeTest {
         float damage;
         float tiradaDadosPrecision = (float) (Math.random() * this.PRECISION); //esto dará un valor entre 0 y el valor de PRECISIÓN
         //para calcular el daño se multiplica el valor base del personaje con un valor aleatorio entre 0 y 100
-        float deflectado = (float) (Math.random() * this.ARMADURA);
+        float deflectado = (float) (Math.random() * defensor.ARMADURA);
 
         if(deflectado < 0){ //la armadura detiene daño, pero no puede "curar"
             deflectado = 0;
@@ -70,7 +70,7 @@ public class PersonajeTest {
         defensor.setVidaActual(defensor.getVidaActual() - damage);
 
         if(defensor.getVidaActual() <= 0){
-            if(defensor.getNombre() != "player1"){ //cada vez que un personaje que no sea el jugador, muere
+            if(!defensor.getNombre().equals("player1")){ //cada vez que un personaje que no sea el jugador, muere
                 MainTest.contadorCiclos ++; //se suma 1 al contador de ciclos
             }
         }
