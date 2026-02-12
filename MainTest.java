@@ -7,7 +7,7 @@ public class MainTest {
     static PersonajeTest jugador;
     static String nombreJugador = "player1";
     static Scanner sc = new Scanner(System.in);
-    public static int contadorCiclos; //este contador comienza siendo 0
+    public static int contadorCiclos; //contador de combates ganados en cada partida
     public static final double CANTIDAD_TEST = 500;
     static double veces0 = 0;
     static double veces1 = 0;
@@ -18,7 +18,7 @@ public class MainTest {
 
     //creación de los personajes y monstruos y se añaden al array
     public static void crearPersonajes(String nombreJugador) {
-        jugador = new PersonajeTest(nombreJugador, 100, 1.1f);
+        jugador = new PersonajeTest(nombreJugador, 100, 1);
 
         PersonajeTest monstruo1 = new PersonajeTest("Esqueleto");
         PersonajeTest monstruo2 = new PersonajeTest("Sireno");
