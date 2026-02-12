@@ -14,6 +14,8 @@ public class Lore {
                 sirviera a un rey muerto hace siglos. 
                 Su calavera se gira con un crujido seco, como si reconociera al intruso,
                 abalanzándose violentamente sobre ti.
+                
+                --- Pulsa <intro> para continuar...
                 """);
     }
 
@@ -32,6 +34,8 @@ public class Lore {
                 
                 Cuando avanzas, el sireno emerge, salpicando agua helada, como si defendiera un secreto 
                 sumergido desde tiempos remotos y, con una rapidez indescriptible, carga contra ti.
+                
+                --- Pulsa <intro> para continuar...
                 """);
     }
 
@@ -51,6 +55,7 @@ public class Lore {
                 Es un guardián ancestral, quizá el último de su linaje, y su presencia basta para 
                 hacer que la ruina parezca viva.
                 
+                --- Pulsa <intro> para continuar...
                 """);
     }
 
@@ -70,6 +75,7 @@ public class Lore {
                 Entonces, la guadaña se eleva con un movimiento lento, casi ritual, como si marcara el 
                 inicio de un duelo inevitable.
                 
+                --- Pulsa <intro> para continuar...
                 """);
     }
 
@@ -89,6 +95,7 @@ public class Lore {
                 ha llegado tan lejos. Su figura se recorta contra el cielo, como si fuera la 
                 guardiana del último secreto de Asterhûn.
                 
+                --- Pulsa <intro> para continuar...
                 """);
     }
 
@@ -112,10 +119,10 @@ public class Lore {
         }
     }
     public static void printPrologo(){
+        System.out.println("\n\n**************************************************************************************************\n");
+        Arte.printTituloVertical();
         System.out.println("""
-                ****************************************************************************************************
-                                             E L    C A M I N O    D E L    G U E R R E R O
-                ****************************************************************************************************
+                **************************************************************************************************
                 
                 Dicen los ancianos que Asterhûn fue un santuario erigido antes de que los reinos tuvieran nombre. 
                 Un lugar donde los sabios hablaban con los espíritus del mundo y donde la magia fluía 
@@ -140,7 +147,6 @@ public class Lore {
                 Algo en su interior ha vuelto a la vida.
                 Y solo quien se atreva a cruzar ese umbral descubrirá la verdad que Asterhûn ha 
                 guardado durante siglos.
-                
                 """);
     }
 }
