@@ -1,3 +1,5 @@
+package com.emiliojimeno.daw.rpg;
+
 import java.util.Random;
 
 public class Personaje {
@@ -19,12 +21,12 @@ public class Personaje {
 
         this.NOMBRE = nombre;
 
-        do {//comprobar que la vida máxima no pueda ser menor de 60
+        do { //comprobar que la vida máxima no pueda ser menor de 60
             this.vidaMaxima = (int) (Math.random() * 100);
         } while (this.vidaMaxima < 60);
 
-        this.vidaActual = vidaMaxima;//el enemigo comienza con la vida al tope
-        
+        this.vidaActual = vidaMaxima; //el enemigo comienza con la vida al tope
+
         //fórmula para aleatorio en un rango: Math.random() * (max - min) + min
         this.ATAQUE = (float)(Math.random() * (MAX_ATAQUE-MIN_ATAQUE)) + MIN_ATAQUE;
         this.ARMADURA = (float)(Math.random() * (MAX_ARMADURA-MIN_ARMADURA)) + MIN_ARMADURA;
@@ -45,13 +47,9 @@ public class Personaje {
     // acción de atacar
     public void atacar(Personaje defensor) {
         float damage;
-        float tiradaDadosPrecision = (float) (Math.random() * this.PRECISION); //esto dará un valor entre 0 y el valor de PRECISIÓN
+        float tiradaDadosPrecision = (float) (Math.random() * this.PRECISION); //esto dará un valor entre 0 y 100
         //para calcular el daño se multiplica el valor base del personaje con un valor aleatorio entre 0 y 100
         float deflectado = (float) (Math.random() * defensor.ARMADURA);
-
-        if(deflectado < 0){ //la armadura detiene daño, pero no puede "curar"
-            deflectado = 0;
-        }
 
         if(tiradaDadosPrecision >= 50){ //si la tirada es inferior a 50, el ataque falla
             damage = (float) ((Math.random() * 100) * this.ATAQUE) - deflectado;
@@ -70,7 +68,7 @@ public class Personaje {
     //este metodo recibe una cantidad de daño y se lo resta a la vida del personaje en cuestión
     public void recibirDamage(float damage, Personaje defensor) {
         defensor.setVidaActual(defensor.getVidaActual() - damage);
-        if(defensor.getVidaActual() <= 0){
+        if(!defensor.comprobarVida()){
             System.out.println(defensor.getNombre() + " ha sido derrotado.");
         }
     }
@@ -87,20 +85,20 @@ public class Personaje {
 
         if (num >= 50 && num < 80) {
             this.setVidaActual(vidaActual + POCION_MINIMA);
-            System.out.println("El monstruo dejó caer lo que parece ser una pequeña y rudimentaria poción de salud.\n" +
+            System.out.println("El monstruo dejó caer lo que parece ser una pequeña y rudimentaria poción de salud." +
                     " Tras beberla, recuperas " + POCION_MINIMA + " puntos de vida.");
         } else if (num >= 80 && num < 92) {
             this.setVidaActual(vidaActual + POCION_MEDIA);
             System.out.println("El monstruo dejó caer lo que parece un botellín de ambar que parece contener " +
-                    "una poción de salud. \nTras beberla, recuperas " + POCION_MEDIA + " puntos de salud.");
+                    "una poción de salud. Tras beberla, recuperas " + POCION_MEDIA + " puntos de salud.");
         } else if (num >= 92 && num < 99) {
             setVidaActual(vidaActual + POCION_GRANDE);
-            System.out.println("El monstruo dejó caer una especie de bota de vino llena de poción de salud.\n" +
+            System.out.println("El monstruo dejó caer una especie de bota de vino llena de poción de salud." +
                     "Tras beberla, recuperas " + POCION_GRANDE + " puntos de salud.");
         } else if (num >= 99) {
             setVidaActual(vidaActual = vidaMaxima);
             System.out.println("El monstruo dejó caer un precioso frasco de cristal lleno de " +
-                    "un líquido de movimiento hipnotizante. \nParece ser una poción de salud muy avanzada." +
+                    "un líquido de movimiento hipnotizante. Parece ser una poción de salud muy avanzada." +
                     "Recuperas todos tus puntos de salud!");
         }
         if (this.vidaActual > this.vidaMaxima){ //la curación no puede exceder el máximo de vida
@@ -126,7 +124,7 @@ public class Personaje {
 
     //getter de variable
     public float getVidaActual() {
-        return vidaActual;
+        return this.vidaActual;
     }
 
     // sirve para cambiar la vida a un personaje (sufrir daño, curarse...)
